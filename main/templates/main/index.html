@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <title>Board List</title>
+</head>
+<body>
+    <div class="container" style="text-align: center">
+        <h1>출제목록</h1> <br/>
+        <div style="text-align: end">
+            <a href="/boardForm" class="btn btn-success">문제 출제하기</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">문제</th>
+              <th scope="col">Success / Fail</th>
+              <th scope="col">문제링크</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for foo in problemList %}
+                <tr class="box">
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ foo.title }}</td>
+                  <td><span style="color: green; font-size:20px; font-weight: bold">{{ foo.success }}</span>/<span style="color: red; font-size:20px; font-weight: bold">{{ foo.fail }}</span></td>
+                  <td><a href="/board/{{ foo.id }}" class="btn btn-primary">문제풀기</a></td>
+                </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    const boxes = document.querySelectorAll(".box");
+    const boxes_btn = document.querySelectorAll(".box button");
+    for(let i=0;i<boxes.length;i++){
+        boxes[i].addEventListener('mouseover',()=>{
+            boxes[i].style.background = "#cccccc";
+        });
+        boxes[i].addEventListener('mouseout',()=>{
+            boxes[i].style.background = "#ffffff";
+        });
+    }
+</script>
+</html>
